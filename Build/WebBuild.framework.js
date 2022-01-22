@@ -1305,7 +1305,7 @@ function _emscripten_asm_const_id(code, a0) {
  return ASM_CONSTS[code](a0);
 }
 STATIC_BASE = GLOBAL_BASE;
-STATICTOP = STATIC_BASE + 4494576;
+STATICTOP = STATIC_BASE + 4502112;
 __ATINIT__.push({
  func: (function() {
   __GLOBAL__sub_I_AccessibilityScriptingClasses_cpp();
@@ -3371,7 +3371,7 @@ __ATINIT__.push({
   ___emscripten_environ_constructor();
  })
 });
-var STATIC_BUMP = 4494576;
+var STATIC_BUMP = 4502112;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 var tempDoublePtr = STATICTOP;
@@ -15666,6 +15666,11 @@ function nullFunc_iiiiffi(x) {
  err("Build with ASSERTIONS=2 for more info.");
  abort(x);
 }
+function nullFunc_iiiiffii(x) {
+ err("Invalid function pointer called with signature 'iiiiffii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");
+ err("Build with ASSERTIONS=2 for more info.");
+ abort(x);
+}
 function nullFunc_iiiiffiii(x) {
  err("Invalid function pointer called with signature 'iiiiffiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");
  err("Build with ASSERTIONS=2 for more info.");
@@ -17271,8 +17276,8 @@ function nullFunc_vjji(x) {
  err("Build with ASSERTIONS=2 for more info.");
  abort(x);
 }
-Module["wasmTableSize"] = 162548;
-Module["wasmMaxTableSize"] = 162548;
+Module["wasmTableSize"] = 162550;
+Module["wasmMaxTableSize"] = 162550;
 function invoke_d(index) {
  var sp = stackSave();
  try {
@@ -18587,6 +18592,16 @@ function invoke_iiiiffi(index, a1, a2, a3, a4, a5, a6) {
  var sp = stackSave();
  try {
   return Module["dynCall_iiiiffi"](index, a1, a2, a3, a4, a5, a6);
+ } catch (e) {
+  stackRestore(sp);
+  if (typeof e !== "number" && e !== "longjmp") throw e;
+  Module["setThrew"](1, 0);
+ }
+}
+function invoke_iiiiffii(index, a1, a2, a3, a4, a5, a6, a7) {
+ var sp = stackSave();
+ try {
+  return Module["dynCall_iiiiffii"](index, a1, a2, a3, a4, a5, a6, a7);
  } catch (e) {
   stackRestore(sp);
   if (typeof e !== "number" && e !== "longjmp") throw e;
@@ -21943,6 +21958,7 @@ Module.asmLibraryArg = {
  "nullFunc_iiiifffffii": nullFunc_iiiifffffii,
  "nullFunc_iiiifffiii": nullFunc_iiiifffiii,
  "nullFunc_iiiiffi": nullFunc_iiiiffi,
+ "nullFunc_iiiiffii": nullFunc_iiiiffii,
  "nullFunc_iiiiffiii": nullFunc_iiiiffiii,
  "nullFunc_iiiifi": nullFunc_iiiifi,
  "nullFunc_iiiififfiii": nullFunc_iiiififfiii,
@@ -22396,6 +22412,7 @@ Module.asmLibraryArg = {
  "invoke_iiiifffffii": invoke_iiiifffffii,
  "invoke_iiiifffiii": invoke_iiiifffiii,
  "invoke_iiiiffi": invoke_iiiiffi,
+ "invoke_iiiiffii": invoke_iiiiffii,
  "invoke_iiiiffiii": invoke_iiiiffiii,
  "invoke_iiiifi": invoke_iiiifi,
  "invoke_iiiififfiii": invoke_iiiififfiii,
@@ -30046,6 +30063,11 @@ var dynCall_iiiiffi = Module["dynCall_iiiiffi"] = (function() {
  assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
  assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
  return Module["asm"]["dynCall_iiiiffi"].apply(null, arguments);
+});
+var dynCall_iiiiffii = Module["dynCall_iiiiffii"] = (function() {
+ assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
+ assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
+ return Module["asm"]["dynCall_iiiiffii"].apply(null, arguments);
 });
 var dynCall_iiiiffiii = Module["dynCall_iiiiffiii"] = (function() {
  assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
